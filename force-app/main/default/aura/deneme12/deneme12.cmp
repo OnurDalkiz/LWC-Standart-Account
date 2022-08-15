@@ -1,0 +1,14 @@
+<aura:component>
+
+    <!-- attributes -->
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+
+    <!-- handlers-->
+
+    <!-- the container element determine the height of the datatable -->
+    <div style="height: 300px">
+        <lightning:datatable>
+        </lightning:datatable>
+    </div>
+</aura:component>

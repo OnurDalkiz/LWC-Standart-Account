@@ -1,0 +1,14 @@
+<template>
+    <lightning-card>
+        <p>{activeSectionsMessage}</p>
+        <lightning-accordion allow-multiple-sections-open
+                            onsectiontoggle={handleSectionToggle}
+                            active-section-name={activeSections}>
+            <lightning-accordion-section name="A" label="Accordion Title A">
+                <p>Onur</p>
+                <p>Dalkiz</p>
+                <p>Istanbul</p>
+            </lightning-accordion-section>
+        </lightning-accordion>
+    </lightning-card>
+</template>
