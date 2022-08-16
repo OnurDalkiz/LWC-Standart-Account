@@ -1,37 +1,23 @@
-<aura:component controller="httpCallOutCtrl">
-    <aura:attribute name="response" type="Map"/>
-    <aura:attribute name="ListOfCurrency" type="String[]"/>
-    
-    <div class="slds-m-around--medium">
-        <!--Header part-->
-        <div class="slds-page-header slds-table slds-table--bordered slds-table--striped slds-col slds-size_6-of-12 slds-p-around_small " role="banner">
-            <div class="slds-media__body">
-                <p class="slds-page-header__title slds-truncate" title="foreign exchange rates">foreign exchange rates By HTTP Callouts</p>
-                <lightning:button variant="brand" label="Make CallOut" onclick="{! c.calloutCtrl }" class="right" />             
-            </div>            
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col"><span class="slds-truncate">Sell CCY</span></th>
-                        <th scope="col"><span class="slds-truncate">Sell Amount</span></th>
-                        <th scope="col"><span class="slds-truncate">Buy CCY</span></th>
-                        <th scope="col"><span class="slds-truncate">Buy Amount</span></th>
-                        <th scope="col"><span class="slds-truncate">Rate</span></th>
-                        <th scope="col"><span class="slds-truncate">Date Booked</span></th>
-                    </tr>
-                </thead>
-                <tbody>                    
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                    </tr>                    
-                </tbody>
-    	    </table>            
-        </div> 
-    </div>    
-    <c:exchange aura:id="exchange"></c:exchange>
+<aura:component controller="callExchange" implements="flexipage:availableForRecordHome,force:hasRecordId"
+    access="global">
+
+    <aura:attribute name="data" type="Object" />
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="draftValues" type="Object" default="[]" />
+    <aura:handler event="force:refreshView" action="{!c.doInit}" />
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    <lightning:card class="slds-p-around_large" title="Exchange Datatable">
+        <div style="text-align:right;" class="slds-p-around_medium">
+            <lightning:button label="New Trade" onclick="{!c.handleClick}" variant="brand"/>
+        </div>
+        <div class="slds-p-around_medium" style="border: 1px solid rgb(138, 136, 136)">
+            <lightning:datatable  class="slds-p-around_medium" 
+                columns="{! v.columns }"
+                data="{! v.data }" 
+                keyField="Id" 
+                draftValues="{! v.draftValues }" 
+                hideCheckboxColumn="true" />
+        </div>
+    </lightning:card>
+    <c:exchange aura:id="exchange" onclick="{!c.handleRenderer}"></c:exchange>
 </aura:component>

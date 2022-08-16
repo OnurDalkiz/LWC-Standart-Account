@@ -1,9 +1,22 @@
 ({
-    calloutCtrl : function(component, event, helper) {
-        // Rates are quoted against the Euro by default. 
-        // Quote against a different currency by setting the base parameter in your request.        
-        var base = 'USD';
-        helper.getResponse(component, base);
+    doInit: function (component, event, helper) {
+        component.set('v.columns', [
+            { label: 'Id', fieldName: 'Name', type: 'text'},
+            { label: 'Sell Currency', fieldName: 'Sell_Currency__c', type: 'text'},
+            { label: 'Sell Amount', fieldName: 'Sell_Amount__c', type: 'currency'},
+            { label: 'Buy Currency', fieldName: 'Buy_Currency__c', type: 'text'},
+            { label: 'Buy Amount', fieldName: 'Buy_Amount__c', type: 'currency'},
+            { label: 'Rate', fieldName: 'Rate__c', type: 'number' },
+            { label: 'Date Booked', fieldName: 'Date_Booked__c', type: 'datetime-local'},
+        ]);
+        helper.fetchData(component, event, helper);
     },
- 
+
+    handleRenderer: function(component, event ){
+        component.find('exchange').LWCFunction();
+    },
+
+    handleClick: function (component, event, helper) {
+        component.find('exchange').LWCFunction();
+    }  
 })

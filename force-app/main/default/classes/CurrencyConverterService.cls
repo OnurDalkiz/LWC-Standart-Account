@@ -9,9 +9,12 @@ public with sharing class CurrencyConverterService {
         string today = String.valueOf(System.today());
         req.setEndpoint('https://api.apilayer.com/fixer/convert?from='+sourceCurrency+'&to='+targetCurrency+'&amount='+amount+'&date='+today);
         req.setMethod('GET');
-        req.setHeader('apikey', 'R2ANTiVvXpQLyoOGSz3PsMMFKCK23ywV');
+        req.setHeader('apikey', 'E56IRsQyacEYDEjM4hcAIJZ5fAcqGPhb');
         res = http.send(req);
         Map<string, object> responseMap = (Map<string, object>) JSON.deserializeUntyped(res.getbody());
-        return (double) responseMap.get('result');
+        return (double) responseMap.get('result');   
+        handleRenderer(event){
+
+        }     
     }
 }

@@ -1,6 +1,0 @@
-<aura:component>
-    <lightning:select name="select1" label="How many tickets?" required="true">
-        <aura:iteration
-        <option value="">choose one...</option>
-    </lightning:select>
-</aura:component>
