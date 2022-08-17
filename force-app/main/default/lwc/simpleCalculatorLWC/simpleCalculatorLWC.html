@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Simple Calculator">
+        <lightning-input style="margin-left:0.5cm;margin-right:0.5cm" name="fNumber" label="First Number" type="number" min="0" onchange={handleChange}>"</lightning-input> <br>
+        <lightning-input style="margin-left:0.5cm;margin-right:0.5cm" name="sNumber" label="Second Number" type="number" min="0" onchange={handleChange}></lightning-input> <br>
+        <lightning-button-group style="margin-left:0.5cm;margin-right:0.5cm">
+            <lightning-button label="Add" onclick={handleAdd}></lightning-button>
+            <lightning-button label="Subtract" onclick={handleSubtract}></lightning-button>
+            <lightning-button label="Multiply" onclick={handleMultiply}></lightning-button>
+            <lightning-button label="Divide" onclick={handleDivide}></lightning-button>
+            <lightning-button label="Reset" onclick={handleDelete}></lightning-button>
+        </lightning-button-group>
+        <br>
+        <h1>Result:{result}</h1>        
+        <br>
+        <lightning-input style="margin-left:0.5cm;margin-right:0.5cm" type="checkbox" label="Show Previous Results" name="Show Previous Results" onclick={handleCheckbox}></lightning-input>
+        <template if:true={check}>
+            <ul>
+                <template for:each={previousValue} for:item="value">
+                    <li key={value}>{value}</li>
+                </template>
+            </ul>
+        </template>
+    </lightning-card>   
+</template>

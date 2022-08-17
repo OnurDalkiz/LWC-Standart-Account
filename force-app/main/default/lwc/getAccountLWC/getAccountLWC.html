@@ -1,0 +1,13 @@
+<template>
+    <lightning-card>
+        <lightning-input type="text" label="Search Account" onchange={handleInput}></lightning-input> <br>
+        <lightning-button label="Get Account" onclick={handleGetAccount}></lightning-button>
+        <ul>
+            <template for:each={accounts} for:item="account">
+                <li key={account.Id}>
+                    Name:{account.Name}, Phone:{account.Phone}
+                </li>
+            </template>
+        </ul>        
+    </lightning-card>
+</template>

@@ -1,24 +1,25 @@
 <aura:component controller="callExchange" implements="flexipage:availableForRecordHome,force:hasRecordId"
     access="global">
-
     <aura:attribute name="data" type="Object" />
     <aura:attribute name="columns" type="List" />
     <aura:attribute name="draftValues" type="Object" default="[]" />
     <aura:handler event="force:refreshView" action="{!c.doInit}" />
     <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
-    <lightning:card class="slds-p-around_large" title="Exchange Datatable">
+    <lightning:card class="slds-p-around_medium" title="Exchange Datatable">
         <hr/>
         <div style="text-align:right;" class="slds-p-around_medium">
             <lightning:button label="New Trade" onclick="{!c.handleClick}" variant="brand"/>
         </div>
         <div class="slds-p-around_medium" style="border: 1px solid rgb(138, 136, 136)">
-            <lightning:datatable  class="slds-p-around_medium" 
+            <lightning:datatable  class="slds-p-around_small"
                 columns="{! v.columns }"
                 data="{! v.data }" 
                 keyField="Id" 
                 draftValues="{! v.draftValues }" 
-                hideCheckboxColumn="true" />
+                hideCheckboxColumn="true"
+                              
+                />
         </div>
     </lightning:card>
-    <c:exchange aura:id="exchange"></c:exchange>
+    <c:exchange aura:id="exchange" onneedToRefreshTable="{!c.createExchange}"></c:exchange>
 </aura:component>
