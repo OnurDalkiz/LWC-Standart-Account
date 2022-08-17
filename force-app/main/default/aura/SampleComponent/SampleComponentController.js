@@ -12,10 +12,6 @@
         helper.fetchData(component, event, helper);
     },
 
-    handleRenderer: function(component, event ){
-        component.find('exchange').LWCFunction();
-    },
-
     handleClick: function (component, event, helper) {
         component.find('exchange').LWCFunction();
     }  

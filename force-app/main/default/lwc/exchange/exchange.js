@@ -1,27 +1,34 @@
-
-
 import { api, LightningElement, track, wire } from 'lwc';
 import convert from '@salesforce/apex/CurrencyConverterService.convert';
+import getSymbols from '@salesforce/apex/CurrencyConverterService.getSymbols';
 import { createRecord } from 'lightning/uiRecordApi';
 
 export default class CurrencyConverter extends LightningElement {
 
+     
 
-    sourceCurrency = 'USD';
-    targetCurrency = 'GBP';
+
+    sourceCurrency = '';
+    targetCurrency = '';
     amount = '';
-    @track convertedAmount;
+    convertedAmount;
     @track rate;
-    symbols={};
+    symbols = {};
 
     DisplayText = false;
     @api LWCFunction() {
         if (this.DisplayText != true) {
             this.DisplayText = true;
-        } else {
+        }
+    }
+
+    cancel() {
+
+        if (this.DisplayText != false) {
             this.DisplayText = false;
         }
-    }        
+
+    }
 
     get options() {
         return [
@@ -33,32 +40,42 @@ export default class CurrencyConverter extends LightningElement {
 
     handleSourceChange(event) {
         this.sourceCurrency = event.detail.value;
+        if (this.targetCurrency != '') {
+            convert({
+                sourceCurrency: this.sourceCurrency,
+                targetCurrency: this.targetCurrency,
+                amount: 1
+            }).then(result => {
+                this.rate = result / 1;
+
+            });
+        }
     }
 
     handleTargetChange(event) {
-        this.targetCurrency = event.detail.value; 
+        this.targetCurrency = event.detail.value;
+        if (this.sourceCurrency != '') {
+            convert({
+                sourceCurrency: this.sourceCurrency,
+                targetCurrency: this.targetCurrency,
+                amount: 1
+            }).then(result => {
+                this.rate = result / 1;
+
+            });
+        }
     }
 
     handleAmountChange(event) {
         this.amount = event.detail.value;
+
+        if (this.rate != null) {
+            this.convertedAmount = this.amount * this.rate;
+        }
+
     }
 
-    handleConvert(event) {
-        convert({
-            sourceCurrency: this.sourceCurrency,
-            targetCurrency: this.targetCurrency,
-            amount: this.amount
-        }).then(result => {
-            this.convertedAmount = result; 
-            this.rate = result / this.amount;
-        });
-    }
-    
-    handleRenderer(){
-        alert('Dikkat')
-    }
-
-    createAccount() { 
+    createExchange() {
         var fields = {
             'Sell_Currency__c': this.sourceCurrency,
             'Sell_Amount__c': this.amount,
@@ -66,15 +83,14 @@ export default class CurrencyConverter extends LightningElement {
             'Buy_Amount__c': this.convertedAmount,
             'Rate__c': this.rate,
             'Date_Booked__c': new Date()
-        };       
+        };
         // Record details to pass to create method with api name of Object.
         var objRecordInput = { 'apiName': 'Foreign_Exchange_Trades__c', fields };
         // LDS method to create record.
         createRecord(objRecordInput).then(response => {
-            alert('Foreign Exchange Trades: ' + response.id);
+            alert('Foreign Exchange Trades is Created: ' + response.id);
         }).catch(error => {
             alert('Error: ' + JSON.stringify(error));
         });
     }
-
 }

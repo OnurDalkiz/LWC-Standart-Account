@@ -1,42 +1,73 @@
 <template>
-        <div if:true={DisplayText} style="text-align:left;" class="slds-p-around_small">
-                <lightning-card title="Currency Converter" icon-name="custom:custom14">
-                        <div class="slds-p-around_medium">
-                                <lightning-combobox name="sourceCurrency" label="Select Source Currency"
-                                        value={sourceCurrency} placeholder="Select Source Currency" options={options}
-                                        onchange={handleSourceChange}></lightning-combobox>
+        <div if:true={DisplayText}
+                class="slds-box slds-p-around_none slds-m-top_x-small slds-m-bottom_medium slds-m-horizontal_none">
+                <lightning-layout vertical-align="center">
+                        <lightning-layout-item size="4" padding="around-small">
+                                <div class="slds-p-around_medium slds-text-align_center">
+                                        <lightning-combobox name="sourceCurrency" label="Select Source Currency"
+                                                value={sourceCurrency} placeholder="Select Source Currency"
+                                                options={options} onchange={handleSourceChange}></lightning-combobox>
+                                </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4" padding="around-small">
+                                <div class="slds-p-around_medium slds-text-align_center">                                        
+                                        <h1>Rate</h1> 
+                                        <br/>
+                                        ➤
+                                        &nbsp;
+                                        <input class="slds-p-around_x-small slds-text-align_center" type="number" value={rate} disabled>
+                                        &nbsp;
+                                        ➤
+                                </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4" padding="around-small">
+                                <div class="slds-p-around_medium slds-text-align_center">
+                                        <lightning-combobox name="targetCurrency" label="Select Target Currency"
+                                                value={targetCurrency} placeholder="Select Target Currency"
+                                                options={options} onchange={handleTargetChange}></lightning-combobox>
+                                </div>
+                        </lightning-layout-item>
+                </lightning-layout>
 
-                                <div class="row">
+                <br />
+
+                <lightning-layout>
+                        <lightning-layout-item size="4" padding="around-small">
+                                <div class="slds-p-around_medium slds-text-align_center">
                                         <lightning-input name="amount" label="Enter Amount" value={amount}
                                                 onchange={handleAmountChange}></lightning-input>
                                 </div>
-
-                                <lightning-combobox name="targetCurrency" label="Select Target Currency"
-                                        value={targetCurrency} placeholder="Select Target Currency" options={options}
-                                        onchange={handleTargetChange}></lightning-combobox>
-
-                                <div class="slds-m-top_small slds-m-bottom_medium">
-                                        <h2 class="slds-text-heading_small slds-m-bottom_small">
-                                                <lightning-button variant="brand" label="Convert" title="Convert"
-                                                        onclick={handleConvert}></lightning-button>
-                                        </h2>
-
-                                        <h2 class="slds-text-heading_small slds-m-bottom_small"
-                                                style="text-align:right;">
-                                                <lightning-button variant="brand" label="Create" title="Create"
-                                                        onclick={createAccount}></lightning-button>
-                                        </h2>
-                                </div>
-
-                                <div class="row">
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4" padding="around-small">
+                                <div class="slds-p-around_medium slds-text-align_center"></div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4" padding="around-small">
+                                <div class="slds-p-around_medium slds-text-align_center">
                                         <lightning-input name="convertedAmount" label="Converted Amount"
-                                                value={convertedAmount}></lightning-input>
+                                                value={convertedAmount} disabled></lightning-input>
                                 </div>
-                        </div>
-                </lightning-card>
+                        </lightning-layout-item>
+                </lightning-layout>
 
-                <lightning-button variant="brand" label="Click" title="Click"
-                                                        onclick={handleRenderer}></lightning-button>
+                <br />
 
+                <lightning-layout>
+                        <lightning-layout-item size="4" padding="around-small">
+                                <div class="slds-p-around_medium slds-text-align_center">
+                                        <lightning-button variant="brand" label="Create" title="Create"
+                                                onclick={createExchange}></lightning-button>
+                                </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4" padding="around-small">
+                                <div class="slds-p-around_medium slds-text-align_center">
+                                </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4" padding="around-small">
+                                <div class="slds-p-around_medium slds-text-align_center">
+                                        <lightning-button variant="brand" label="Cancel" title="Cancel"
+                                                onclick={cancel}></lightning-button>
+                                </div>
+                        </lightning-layout-item>
+                </lightning-layout>
         </div>
 </template>

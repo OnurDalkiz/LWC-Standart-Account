@@ -7,6 +7,7 @@
     <aura:handler event="force:refreshView" action="{!c.doInit}" />
     <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
     <lightning:card class="slds-p-around_large" title="Exchange Datatable">
+        <hr/>
         <div style="text-align:right;" class="slds-p-around_medium">
             <lightning:button label="New Trade" onclick="{!c.handleClick}" variant="brand"/>
         </div>
@@ -19,5 +20,5 @@
                 hideCheckboxColumn="true" />
         </div>
     </lightning:card>
-    <c:exchange aura:id="exchange" onclick="{!c.handleRenderer}"></c:exchange>
+    <c:exchange aura:id="exchange"></c:exchange>
 </aura:component>
